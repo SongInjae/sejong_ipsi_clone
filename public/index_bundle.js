@@ -1,297 +1,427 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
-
-/***/ "./index.js":
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/main.scss */ \"./scss/main.scss\");\n\n\n/* popup창 관련 js - 'X'나 '+' 누르면 클래스 toggle과 글자 변환 */\nconst btnElement = document.getElementById(\"close\");\n\nbtnElement.addEventListener(\"click\", () => {\n  const ulElement = document.querySelector(\".popup ul\");\n  ulElement.classList.toggle(\"on\");\n  if (ulElement.className === \"on\") {\n    btnElement.textContent = \"+\";\n  } else {\n    btnElement.textContent = \"\\u00D7\";\n  }\n});\n\n/* main__content관련 js코드 - 각 탭의 주제를 누르면 관련 내용으로 바뀌도록 하기 */\nconst tabBoxElement = document.getElementsByClassName(\"board__tabBox\")[0];\n\ntabBoxElement.addEventListener(\"click\", (e) => {\n  const liElements = document.getElementsByClassName(\"tab\");\n  const liArray = Array.from(liElements);\n  liArray.forEach((liElement) => {\n    liElement.classList.remove(\"on\");\n  });\n  const clickElement = e.target.closest(\"li\");\n  clickElement.classList.toggle(\"on\");\n\n  const { id } = clickElement.dataset;\n  const contentElements = document.getElementsByClassName(\"content\");\n  const contentArray = Array.from(contentElements);\n  contentArray.forEach((contentElement) => {\n    const checkId = contentElement.getAttribute(\"data-id\");\n    if (checkId === id) {\n      if (!contentElement.classList.contains(\"on\"))\n        contentElement.classList.toggle(\"on\");\n    } else {\n      contentElement.classList.remove(\"on\");\n    }\n  });\n\n  /* board__tabBox 관련 js 코드 - +버튼 클릭시 그에 맞는 해당 페이지로 이동 */\n  const atagElement = document.getElementsByClassName(\"tabPlus\")[0];\n  console.log(atagElement, id);\n  if (id === \"1\") {\n    atagElement.setAttribute(\n      \"href\",\n      \"http://ipsi.sejong.ac.kr/sub_page/sub5/0107_list.asp?tab1=5&B_CODE=BOARD_1455878015&B_CATEGORY=0\"\n    );\n  } else if (id === \"2\") {\n    atagElement.setAttribute(\n      \"href\",\n      \"http://ipsi.sejong.ac.kr/sub_page/sub5/0102_list.asp?tab1=5&B_CODE=BOARD_1455985403&B_CATEGORY=0\"\n    );\n  } else if (id === \"3\") {\n    atagElement.setAttribute(\n      \"href\",\n      \"http://ipsi.sejong.ac.kr/sub_page/sub5/0109_list.asp?tab1=5&B_CODE=BOARD_1464099007&B_CATEGORY=0\"\n    );\n  }\n});\n\n/* main__image--pictuer 관련 js코드 -  이미지가 5초에 한 번씩 바뀌도록 변환 */\nconst pictureItems = document.querySelectorAll(\".picture--item\");\nconst tabSquare = document.querySelectorAll(\".tab--square\");\nlet currentIndex = 0;\nlet intervalId;\n\nconst tabArray = Array.from(tabSquare);\ntabArray.forEach((tab, idx) => {\n  tab.addEventListener(\"click\", () => {\n    const previousIndex = currentIndex;\n    currentIndex = idx;\n    showNextImage(previousIndex, currentIndex);\n  });\n});\n\nfunction checkIdx() {\n  const previousIndex = currentIndex;\n  currentIndex = (currentIndex + 1) % pictureItems.length;\n\n  showNextImage(previousIndex, currentIndex);\n}\n\nfunction showNextImage(prvIdx, nextIdx) {\n  pictureItems[prvIdx].querySelector(\"img\").style.opacity = 0;\n  pictureItems[nextIdx].querySelector(\"img\").style.opacity = 1;\n\n  tabSquare[prvIdx].classList.remove(\"on\");\n  tabSquare[nextIdx].classList.add(\"on\");\n}\n\nfunction startInterval() {\n  intervalId = setInterval(checkIdx, 5000);\n}\n\nfunction stopInterval() {\n  clearInterval(intervalId);\n}\n\nstartInterval();\n\nconst stopButton = document.querySelector(\".stop\");\nstopButton.addEventListener(\"click\", () => {\n  if (stopButton.classList.contains(\"on\")) {\n    stopButton.textContent = \"►\";\n  } else {\n    stopButton.textContent = \"||\";\n  }\n  stopButton.classList.toggle(\"on\");\n  if (intervalId) {\n    stopInterval();\n    intervalId = null;\n  } else {\n    startInterval();\n  }\n});\n\n/* siteGo관련 js 코드 - 클릭했을 때 그의 자식요소 display: none -> block시키기 */\nconst divElement = document.getElementsByClassName(\"siteGo\")[0];\n\ndivElement.addEventListener(\"click\", (e) => {\n  const depthElement = e.target.parentElement.querySelector(\".depth2\");\n  console.log(e.target);\n  depthElement.classList.toggle(\"on\");\n});\n\nconst goElement = document.getElementsByClassName(\"go\")[0];\ngoElement.addEventListener(\"click\", () => alert(\"주요 사이트를 선택해주세요.\"));\n\n\n//# sourceURL=webpack://fedc4-8_css/./index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./scss/main.scss":
-/*!*****************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./scss/main.scss ***!
-  \*****************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/getUrl.js */ \"./node_modules/css-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);\n// Imports\n\n\n\nvar ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../images/sejong_u_home_arrow.png */ \"./images/sejong_u_home_arrow.png\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../images/h1_logo.gif */ \"./images/h1_logo.gif\"), __webpack_require__.b);\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\nvar ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);\nvar ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, `@charset \"UTF-8\";\n* {\n  margin: 0;\n  padding: 0;\n}\n\na {\n  text-decoration: none;\n}\n\n.maxScreen {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n\n.header__utils nav {\n  display: flex;\n  justify-content: flex-end;\n  font-size: 12px;\n}\n.header__utils nav div {\n  margin: 10px 0;\n}\n.header__utils nav div a {\n  color: #777;\n  line-height: 1.5;\n  padding: 0 25px;\n  font-weight: 500;\n  font-size: 13px;\n}\n.header__utils nav div a:first-child {\n  border-right: 1px solid #777;\n}\n.header__utils--school {\n  background: url(${___CSS_LOADER_URL_REPLACEMENT_0___}) 18px 12px no-repeat #777;\n  vertical-align: middle;\n  overflow: hidden;\n  text-decoration: none;\n}\n.header__utils--school span {\n  padding: 11px 15px 13px 46px;\n  color: white;\n  line-height: 3;\n}\n.header__menu {\n  background-color: #a31432;\n}\n.header__menu nav {\n  position: relative;\n}\n.header__menu nav:hover .depth2 {\n  display: flex;\n}\n.header__menu nav ul {\n  width: 100%;\n  display: flex;\n  list-style: none;\n  justify-content: center;\n  color: white;\n  text-align: center;\n}\n.header__menu nav ul li {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.header__menu--title {\n  background: url(${___CSS_LOADER_URL_REPLACEMENT_1___}) no-repeat center;\n  width: 240px;\n  height: 65px;\n  display: block;\n  background-color: white;\n}\n.header__menu--main {\n  padding: 0px 30px;\n  border-right: 1px solid #ba4f65;\n  border-bottom: 1px solid #ba4f65;\n  word-break: keep-all;\n  font-weight: 700;\n  flex: 1;\n}\n.header__menu--main:hover {\n  background-color: #630c1e;\n}\n.header__menu--main:hover .depth2 {\n  background-color: #f1e9d9;\n}\n.header__menu--main a {\n  color: white;\n}\n.header .depth2 {\n  display: none;\n  position: relative;\n  border-right: none;\n  border-left: 1px solid #dedede;\n  position: absolute; /* 부모 요소를 기준으로 위치를 설정 */\n  top: 100%; /* 부모 요소(.header__menu) 아래에 위치하도록 설정 */\n  flex-direction: column; /* 가로 메뉴를 세로로 배치 */\n  background-color: #fff;\n  z-index: 100;\n}\n.header .depth2 ul {\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n  height: 350px;\n  justify-content: flex-start !important;\n}\n.header .depth2 ul li {\n  border-bottom: none;\n  padding: 10px 50px 10px 10px;\n  justify-content: flex-start;\n  font-size: 12px;\n  font-weight: 400;\n}\n.header .depth2 ul li a {\n  width: 76px;\n  color: #555;\n  text-align: left;\n}\n.header .depth2 ul li a:hover {\n  color: #a31432;\n  font-weight: 800;\n}\n.header .depth2__title {\n  padding-top: 5px;\n  height: 350px;\n  color: #555;\n  text-align: left;\n  align-items: flex-end;\n  display: flex;\n}\n.header .depth2__title span {\n  padding: 0 40px 100px 30px;\n  font-weight: 600;\n}\n\n.main {\n  position: relative;\n}\n.main__image {\n  position: relative;\n  max-width: 100%;\n  height: 885px;\n}\n.main__image--title {\n  position: absolute;\n  left: 50%;\n  top: 300px;\n  transform: translateX(-50%);\n}\n.main__image--picture {\n  display: flex;\n}\n.main__image--picture li {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  overflow: hidden;\n}\n.main__image--picture li:first-child img {\n  opacity: 1;\n}\n.main__image--picture li img {\n  height: 100%;\n  transform: translateX(-20%);\n  opacity: 0;\n  transition: opacity 2s ease;\n}\n.main__image--tab {\n  position: absolute;\n  top: 600px;\n  gap: 20px;\n  left: 50%;\n}\n.main__image--tab button {\n  width: 10px;\n  height: 10px;\n  border: none;\n  margin: 0 3px;\n  cursor: pointer;\n}\n.main__image--tab button:not(:last-child) {\n  border-radius: 50%;\n}\n.main__image--tab button:last-child {\n  background: none;\n  color: white;\n  font-weight: 800;\n}\n.main__image--tab .on {\n  background-color: orange;\n}\n.main__content {\n  margin-top: -150px;\n  background-color: #f0f0f0;\n  height: 380px;\n  display: flex;\n}\n.main__content--container {\n  display: flex;\n  height: 340px;\n  z-index: 20;\n}\n.main__content--container .board {\n  width: 635px;\n  height: 100%;\n}\n.main__content--container .board__tabBox {\n  height: 70px;\n}\n.main__content--container .board__tabBox ul {\n  display: flex;\n  list-style: none;\n  font-size: 18px;\n  font-weight: 700;\n  align-items: center;\n  text-align: center;\n  width: 100%;\n  height: 100%;\n}\n.main__content--container .board__tabBox ul li {\n  width: 30%;\n  height: 100%;\n  line-height: 70px;\n  padding: 0px 40px;\n  background-color: rgba(85, 85, 85, 0.7);\n  color: white;\n}\n.main__content--container .board__tabBox ul li:last-child {\n  font-size: 36px;\n  padding: 0;\n  width: 10%;\n}\n.main__content--container .board__tabBox ul li:hover {\n  cursor: pointer;\n}\n.main__content--container .board__tabBox ul li a {\n  display: block;\n  color: white;\n  width: 100%;\n  height: 100%;\n}\n.main__content--container .board__tabBox ul .on {\n  background-color: #fff;\n  color: black;\n  text-decoration: underline;\n}\n.main__content--container .board__tabContent {\n  height: 270px;\n}\n.main__content--container .board__tabContent div {\n  display: none;\n  height: 100%;\n}\n.main__content--container .board__tabContent div ul {\n  list-style: none;\n  background-color: #fff;\n  padding-left: 20px;\n  padding-top: 30px;\n  height: 100%;\n  box-sizing: border-box;\n}\n.main__content--container .board__tabContent div ul li {\n  position: relative;\n  padding-left: 20px;\n  display: flex;\n  align-items: center;\n  margin-bottom: 15px;\n}\n.main__content--container .board__tabContent div ul li::before {\n  content: \"-\";\n  position: absolute;\n  color: #a31432;\n  font-weight: bold;\n  left: 0;\n}\n.main__content--container .board__tabContent div ul li .type0 {\n  background-color: #818181;\n  padding: 5px 5px;\n  color: white;\n  font-size: 12px;\n  width: 8%;\n  text-align: center;\n}\n.main__content--container .board__tabContent div ul li .type1 {\n  background-color: #3772aa;\n  padding: 5px 5px;\n  color: white;\n  font-size: 12px;\n  width: 8%;\n  text-align: center;\n}\n.main__content--container .board__tabContent div ul li .type2 {\n  background-color: #0000ff;\n  padding: 5px 5px;\n  color: white;\n  font-size: 12px;\n  width: 8%;\n  text-align: center;\n}\n.main__content--container .board__tabContent div ul li .type3 {\n  background-color: #ef972a;\n  padding: 5px 5px;\n  color: white;\n  font-size: 12px;\n  width: 8%;\n  text-align: center;\n}\n.main__content--container .board__tabContent div ul li .type4 {\n  background-color: #52c050;\n  padding: 5px 5px;\n  color: white;\n  font-size: 12px;\n  width: 8%;\n  text-align: center;\n}\n.main__content--container .board__tabContent div ul li a {\n  padding-left: 5px;\n  color: black;\n  font-weight: 500;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n  display: inline-block;\n  width: 62%;\n}\n.main__content--container .board__tabContent div ul li .board__tabContent_date {\n  color: gray;\n  padding-left: 30px;\n}\n.main__content--container .board__tabContent .on {\n  display: block;\n}\n.main__content--container .menu {\n  width: 565px;\n}\n.main__content--container .menu ul {\n  list-style: none;\n  display: grid;\n  width: 100%;\n  height: 100%;\n  grid-template-rows: repeat(2, 1fr);\n  grid-template-columns: repeat(3, 1fr);\n}\n.main__content--container .menu ul li {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  word-break: keep-all;\n  text-align: center;\n  gap: 10px;\n  color: white;\n}\n.main__content--container .menu ul li span {\n  font-size: 12px;\n}\n.main__content--container .menu ul li a {\n  border: 1px solid rgba(255, 255, 255, 0.5);\n  padding: 5px 20px;\n  color: white;\n}\n.main__content--container .menu__first {\n  background-color: #a31432;\n  color: #f7bac7;\n}\n.main__content--container .menu__first:not(:last-child) {\n  border-right: 1px solid #ba4f65;\n}\n.main__content--container .menu__second {\n  background-color: rgb(81, 98, 111);\n  color: #d8ebf9;\n}\n.main__content--container .menu__second:not(:last-child) {\n  border-right: 1px solid #687c8b;\n}\n.main .popup {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.3);\n  top: 30px;\n  right: 120px;\n  color: white;\n  padding: 20px;\n  width: 480px;\n}\n.main .popup div {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.main .popup div button {\n  background-color: transparent;\n  border: none;\n  color: white;\n  font-size: 36px;\n  font-weight: 200;\n  cursor: pointer;\n}\n.main .popup ul {\n  list-style: none;\n  height: 200px;\n  overflow: hidden;\n  transition: height 1s;\n}\n.main .popup ul li {\n  margin: 10px 0;\n  transition: height 1s;\n}\n.main .popup ul li a {\n  border-radius: 10px;\n  display: flex;\n  align-items: center;\n  color: white;\n}\n.main .popup ul li a span {\n  padding: 10px;\n}\n.main .popup ul li a span:first-child {\n  width: 426px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  display: inline-block;\n  font-weight: 600;\n}\n.main .popup ul li a span:last-child {\n  width: 15px;\n  text-align: center;\n  background-color: #a31432;\n}\n.main .popup ul li:not(:last-child) span:first-child {\n  background-color: #a7874f;\n}\n.main .popup ul li:last-child span:first-child {\n  background-color: white;\n  color: black;\n}\n.main .popup .on {\n  height: 0;\n  overflow: hidden;\n}\n\n.footer__menu {\n  background-color: #f0f0f0;\n  border-top: 1px solid #d6d6d6;\n  border-bottom: 1px solid #d6d6d6;\n}\n.footer__menu nav > ul {\n  list-style: none;\n  display: flex;\n  position: relative;\n}\n.footer__menu nav > ul > li > a {\n  color: #222;\n}\n.footer__menu nav > ul > li:not(:last-child) {\n  border-left: 1px solid #d6d6d6;\n  padding: 15px 30px;\n  font-size: 14px;\n}\n.footer__menu nav > ul > li:last-child {\n  position: absolute;\n  right: 0;\n  color: white;\n  display: flex;\n}\n.footer__menu nav > ul > li:last-child > div:not(:last-child) {\n  padding: 10px 20px;\n}\n.footer__menu nav > ul > li:last-child > div:first-child {\n  background-color: #3a3a3a;\n  font-size: 12px;\n  line-height: 2;\n  width: 135px;\n}\n.footer__menu nav > ul > li:last-child > div:first-child:hover {\n  cursor: pointer;\n}\n.footer__menu nav > ul > li:last-child > div:nth-child(2) {\n  background-color: black;\n  font-size: 18px;\n  line-height: 1.5;\n  width: 20px;\n  text-align: center;\n}\n.footer__menu nav > ul > li:last-child > div:nth-child(2):hover {\n  cursor: pointer;\n}\n.footer__menu nav > ul > li:last-child .depth2 {\n  display: none;\n}\n.footer__menu nav > ul > li:last-child .depth2 ul {\n  list-style: none;\n  height: 250px;\n  width: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  z-index: 100;\n  transform: translateY(-102%);\n}\n.footer__menu nav > ul > li:last-child .depth2 ul li {\n  padding: 5px 20px;\n  background-color: #a31432;\n  border: 1px solid white;\n}\n.footer__menu nav > ul > li:last-child .depth2 ul li:last-child {\n  border-bottom: none;\n}\n.footer__menu nav > ul > li:last-child .depth2 ul li a {\n  color: white;\n}\n.footer__menu nav > ul > li:last-child .on {\n  display: block;\n}\n.footer__address {\n  padding-top: 20px;\n}\n.footer__address--container {\n  display: flex;\n  justify-content: space-between;\n}\n.footer__address--content {\n  display: flex;\n}\n.footer__address--content img {\n  height: 32px;\n}\n.footer__address--content div {\n  font-size: 13px;\n  padding-left: 10px;\n}\n.footer__address--promotion img {\n  width: 237px;\n}`, \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://fedc4-8_css/./scss/main.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-eval("\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\nmodule.exports = function (cssWithMappingToString) {\n  var list = [];\n\n  // return the list of modules as css string\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = \"\";\n      var needLayer = typeof item[5] !== \"undefined\";\n      if (item[4]) {\n        content += \"@supports (\".concat(item[4], \") {\");\n      }\n      if (item[2]) {\n        content += \"@media \".concat(item[2], \" {\");\n      }\n      if (needLayer) {\n        content += \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\");\n      }\n      content += cssWithMappingToString(item);\n      if (needLayer) {\n        content += \"}\";\n      }\n      if (item[2]) {\n        content += \"}\";\n      }\n      if (item[4]) {\n        content += \"}\";\n      }\n      return content;\n    }).join(\"\");\n  };\n\n  // import a list of modules into the list\n  list.i = function i(modules, media, dedupe, supports, layer) {\n    if (typeof modules === \"string\") {\n      modules = [[null, modules, undefined]];\n    }\n    var alreadyImportedModules = {};\n    if (dedupe) {\n      for (var k = 0; k < this.length; k++) {\n        var id = this[k][0];\n        if (id != null) {\n          alreadyImportedModules[id] = true;\n        }\n      }\n    }\n    for (var _k = 0; _k < modules.length; _k++) {\n      var item = [].concat(modules[_k]);\n      if (dedupe && alreadyImportedModules[item[0]]) {\n        continue;\n      }\n      if (typeof layer !== \"undefined\") {\n        if (typeof item[5] === \"undefined\") {\n          item[5] = layer;\n        } else {\n          item[1] = \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\").concat(item[1], \"}\");\n          item[5] = layer;\n        }\n      }\n      if (media) {\n        if (!item[2]) {\n          item[2] = media;\n        } else {\n          item[1] = \"@media \".concat(item[2], \" {\").concat(item[1], \"}\");\n          item[2] = media;\n        }\n      }\n      if (supports) {\n        if (!item[4]) {\n          item[4] = \"\".concat(supports);\n        } else {\n          item[1] = \"@supports (\".concat(item[4], \") {\").concat(item[1], \"}\");\n          item[4] = supports;\n        }\n      }\n      list.push(item);\n    }\n  };\n  return list;\n};\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/css-loader/dist/runtime/api.js?");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
-/*!********************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
-  \********************************************************/
-/***/ ((module) => {
-
-eval("\n\nmodule.exports = function (url, options) {\n  if (!options) {\n    options = {};\n  }\n  if (!url) {\n    return url;\n  }\n  url = String(url.__esModule ? url.default : url);\n\n  // If url is already wrapped in quotes, remove them\n  if (/^['\"].*['\"]$/.test(url)) {\n    url = url.slice(1, -1);\n  }\n  if (options.hash) {\n    url += options.hash;\n  }\n\n  // Should url be wrapped?\n  // See https://drafts.csswg.org/css-values-3/#urls\n  if (/[\"'() \\t\\n]|(%20)/.test(url) || options.needQuotes) {\n    return \"\\\"\".concat(url.replace(/\"/g, '\\\\\"').replace(/\\n/g, \"\\\\n\"), \"\\\"\");\n  }\n  return url;\n};\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/css-loader/dist/runtime/getUrl.js?");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/noSourceMaps.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/noSourceMaps.js ***!
-  \**************************************************************/
-/***/ ((module) => {
-
-eval("\n\nmodule.exports = function (i) {\n  return i[1];\n};\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/css-loader/dist/runtime/noSourceMaps.js?");
-
-/***/ }),
-
-/***/ "./scss/main.scss":
-/*!************************!*\
-  !*** ./scss/main.scss ***!
-  \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleDomAPI.js */ \"./node_modules/style-loader/dist/runtime/styleDomAPI.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertBySelector.js */ \"./node_modules/style-loader/dist/runtime/insertBySelector.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ \"./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertStyleElement.js */ \"./node_modules/style-loader/dist/runtime/insertStyleElement.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleTagTransform.js */ \"./node_modules/style-loader/dist/runtime/styleTagTransform.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_main_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./main.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./scss/main.scss\");\n\n      \n      \n      \n      \n      \n      \n      \n      \n      \n\nvar options = {};\n\noptions.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());\noptions.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());\n\n      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, \"head\");\n    \noptions.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());\noptions.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());\n\nvar update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_main_scss__WEBPACK_IMPORTED_MODULE_6__[\"default\"], options);\n\n\n\n\n       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_main_scss__WEBPACK_IMPORTED_MODULE_6__[\"default\"] && _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_main_scss__WEBPACK_IMPORTED_MODULE_6__[\"default\"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_main_scss__WEBPACK_IMPORTED_MODULE_6__[\"default\"].locals : undefined);\n\n\n//# sourceURL=webpack://fedc4-8_css/./scss/main.scss?");
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-  \****************************************************************************/
-/***/ ((module) => {
-
-eval("\n\nvar stylesInDOM = [];\nfunction getIndexByIdentifier(identifier) {\n  var result = -1;\n  for (var i = 0; i < stylesInDOM.length; i++) {\n    if (stylesInDOM[i].identifier === identifier) {\n      result = i;\n      break;\n    }\n  }\n  return result;\n}\nfunction modulesToDom(list, options) {\n  var idCountMap = {};\n  var identifiers = [];\n  for (var i = 0; i < list.length; i++) {\n    var item = list[i];\n    var id = options.base ? item[0] + options.base : item[0];\n    var count = idCountMap[id] || 0;\n    var identifier = \"\".concat(id, \" \").concat(count);\n    idCountMap[id] = count + 1;\n    var indexByIdentifier = getIndexByIdentifier(identifier);\n    var obj = {\n      css: item[1],\n      media: item[2],\n      sourceMap: item[3],\n      supports: item[4],\n      layer: item[5]\n    };\n    if (indexByIdentifier !== -1) {\n      stylesInDOM[indexByIdentifier].references++;\n      stylesInDOM[indexByIdentifier].updater(obj);\n    } else {\n      var updater = addElementStyle(obj, options);\n      options.byIndex = i;\n      stylesInDOM.splice(i, 0, {\n        identifier: identifier,\n        updater: updater,\n        references: 1\n      });\n    }\n    identifiers.push(identifier);\n  }\n  return identifiers;\n}\nfunction addElementStyle(obj, options) {\n  var api = options.domAPI(options);\n  api.update(obj);\n  var updater = function updater(newObj) {\n    if (newObj) {\n      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap && newObj.supports === obj.supports && newObj.layer === obj.layer) {\n        return;\n      }\n      api.update(obj = newObj);\n    } else {\n      api.remove();\n    }\n  };\n  return updater;\n}\nmodule.exports = function (list, options) {\n  options = options || {};\n  list = list || [];\n  var lastIdentifiers = modulesToDom(list, options);\n  return function update(newList) {\n    newList = newList || [];\n    for (var i = 0; i < lastIdentifiers.length; i++) {\n      var identifier = lastIdentifiers[i];\n      var index = getIndexByIdentifier(identifier);\n      stylesInDOM[index].references--;\n    }\n    var newLastIdentifiers = modulesToDom(newList, options);\n    for (var _i = 0; _i < lastIdentifiers.length; _i++) {\n      var _identifier = lastIdentifiers[_i];\n      var _index = getIndexByIdentifier(_identifier);\n      if (stylesInDOM[_index].references === 0) {\n        stylesInDOM[_index].updater();\n        stylesInDOM.splice(_index, 1);\n      }\n    }\n    lastIdentifiers = newLastIdentifiers;\n  };\n};\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js?");
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/insertBySelector.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/insertBySelector.js ***!
-  \********************************************************************/
-/***/ ((module) => {
-
-eval("\n\nvar memo = {};\n\n/* istanbul ignore next  */\nfunction getTarget(target) {\n  if (typeof memo[target] === \"undefined\") {\n    var styleTarget = document.querySelector(target);\n\n    // Special case to return head of iframe instead of iframe itself\n    if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {\n      try {\n        // This will throw an exception if access to iframe is blocked\n        // due to cross-origin restrictions\n        styleTarget = styleTarget.contentDocument.head;\n      } catch (e) {\n        // istanbul ignore next\n        styleTarget = null;\n      }\n    }\n    memo[target] = styleTarget;\n  }\n  return memo[target];\n}\n\n/* istanbul ignore next  */\nfunction insertBySelector(insert, style) {\n  var target = getTarget(insert);\n  if (!target) {\n    throw new Error(\"Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.\");\n  }\n  target.appendChild(style);\n}\nmodule.exports = insertBySelector;\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/style-loader/dist/runtime/insertBySelector.js?");
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/insertStyleElement.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
-  \**********************************************************************/
-/***/ ((module) => {
-
-eval("\n\n/* istanbul ignore next  */\nfunction insertStyleElement(options) {\n  var element = document.createElement(\"style\");\n  options.setAttributes(element, options.attributes);\n  options.insert(element, options.options);\n  return element;\n}\nmodule.exports = insertStyleElement;\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/style-loader/dist/runtime/insertStyleElement.js?");
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
-  \**********************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("\n\n/* istanbul ignore next  */\nfunction setAttributesWithoutAttributes(styleElement) {\n  var nonce =  true ? __webpack_require__.nc : 0;\n  if (nonce) {\n    styleElement.setAttribute(\"nonce\", nonce);\n  }\n}\nmodule.exports = setAttributesWithoutAttributes;\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js?");
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/styleDomAPI.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
-  \***************************************************************/
-/***/ ((module) => {
-
-eval("\n\n/* istanbul ignore next  */\nfunction apply(styleElement, options, obj) {\n  var css = \"\";\n  if (obj.supports) {\n    css += \"@supports (\".concat(obj.supports, \") {\");\n  }\n  if (obj.media) {\n    css += \"@media \".concat(obj.media, \" {\");\n  }\n  var needLayer = typeof obj.layer !== \"undefined\";\n  if (needLayer) {\n    css += \"@layer\".concat(obj.layer.length > 0 ? \" \".concat(obj.layer) : \"\", \" {\");\n  }\n  css += obj.css;\n  if (needLayer) {\n    css += \"}\";\n  }\n  if (obj.media) {\n    css += \"}\";\n  }\n  if (obj.supports) {\n    css += \"}\";\n  }\n  var sourceMap = obj.sourceMap;\n  if (sourceMap && typeof btoa !== \"undefined\") {\n    css += \"\\n/*# sourceMappingURL=data:application/json;base64,\".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), \" */\");\n  }\n\n  // For old IE\n  /* istanbul ignore if  */\n  options.styleTagTransform(css, styleElement, options.options);\n}\nfunction removeStyleElement(styleElement) {\n  // istanbul ignore if\n  if (styleElement.parentNode === null) {\n    return false;\n  }\n  styleElement.parentNode.removeChild(styleElement);\n}\n\n/* istanbul ignore next  */\nfunction domAPI(options) {\n  if (typeof document === \"undefined\") {\n    return {\n      update: function update() {},\n      remove: function remove() {}\n    };\n  }\n  var styleElement = options.insertStyleElement(options);\n  return {\n    update: function update(obj) {\n      apply(styleElement, options, obj);\n    },\n    remove: function remove() {\n      removeStyleElement(styleElement);\n    }\n  };\n}\nmodule.exports = domAPI;\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/style-loader/dist/runtime/styleDomAPI.js?");
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/styleTagTransform.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
-  \*********************************************************************/
-/***/ ((module) => {
-
-eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElement) {\n  if (styleElement.styleSheet) {\n    styleElement.styleSheet.cssText = css;\n  } else {\n    while (styleElement.firstChild) {\n      styleElement.removeChild(styleElement.firstChild);\n    }\n    styleElement.appendChild(document.createTextNode(css));\n  }\n}\nmodule.exports = styleTagTransform;\n\n//# sourceURL=webpack://fedc4-8_css/./node_modules/style-loader/dist/runtime/styleTagTransform.js?");
-
-/***/ }),
-
-/***/ "./images/h1_logo.gif":
-/*!****************************!*\
-  !*** ./images/h1_logo.gif ***!
-  \****************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("module.exports = __webpack_require__.p + \"53145f31ee69f9f4bd3f.gif\";\n\n//# sourceURL=webpack://fedc4-8_css/./images/h1_logo.gif?");
-
-/***/ }),
-
-/***/ "./images/sejong_u_home_arrow.png":
-/*!****************************************!*\
-  !*** ./images/sejong_u_home_arrow.png ***!
-  \****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("module.exports = __webpack_require__.p + \"c833a25c531ae8b80efa.png\";\n\n//# sourceURL=webpack://fedc4-8_css/./images/sejong_u_home_arrow.png?");
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src;
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) {
-/******/ 					var i = scripts.length - 1;
-/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"main": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		// no on chunks loaded
-/******/ 		
-/******/ 		// no jsonp function
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./index.js");
-/******/ 	
-/******/ })()
-;
+(() => {
+  "use strict";
+  var t = {
+      405: (t, e, n) => {
+        n.d(e, { Z: () => h });
+        var o = n(81),
+          i = n.n(o),
+          a = n(645),
+          r = n.n(a),
+          l = n(667),
+          c = n.n(l),
+          d = new URL(n(900), n.b),
+          s = new URL(n(775), n.b),
+          p = r()(i()),
+          u = c()(d),
+          f = c()(s);
+        p.push([
+          t.id,
+          `*{margin:0;padding:0}a{text-decoration:none}.maxScreen{max-width:1200px;margin:0 auto}.header__utils nav{display:flex;justify-content:flex-end;font-size:12px}.header__utils nav div{margin:10px 0}.header__utils nav div a{color:#777;line-height:1.5;padding:0 25px;font-weight:500;font-size:13px}.header__utils nav div a:first-child{border-right:1px solid #777}.header__utils--school{background:url(${u}) 18px 12px no-repeat #777;vertical-align:middle;overflow:hidden;text-decoration:none}.header__utils--school span{padding:11px 15px 13px 46px;color:#fff;line-height:3}.header__menu{background-color:#a31432}.header__menu nav{position:relative}.header__menu nav:hover .depth2{display:flex}.header__menu nav ul{width:100%;display:flex;list-style:none;justify-content:center;color:#fff;text-align:center}.header__menu nav ul li{display:flex;align-items:center;justify-content:center}.header__menu--title{background:url(${f}) no-repeat center;width:240px;height:65px;display:block;background-color:#fff}.header__menu--main{padding:0px 30px;border-right:1px solid #ba4f65;border-bottom:1px solid #ba4f65;word-break:keep-all;font-weight:700;flex:1}.header__menu--main:hover{background-color:#630c1e}.header__menu--main:hover .depth2{background-color:#f1e9d9}.header__menu--main a{color:#fff}.header .depth2{display:none;position:relative;border-right:none;border-left:1px solid #dedede;position:absolute;top:100%;flex-direction:column;background-color:#fff;z-index:100}.header .depth2 ul{padding-top:5px;display:flex;flex-direction:column;height:350px;justify-content:flex-start !important}.header .depth2 ul li{border-bottom:none;padding:10px 50px 10px 10px;justify-content:flex-start;font-size:12px;font-weight:400}.header .depth2 ul li a{width:76px;color:#555;text-align:left}.header .depth2 ul li a:hover{color:#a31432;font-weight:800}.header .depth2__title{padding-top:5px;height:350px;color:#555;text-align:left;align-items:flex-end;display:flex}.header .depth2__title span{padding:0 40px 100px 30px;font-weight:600}.main{position:relative}.main__image{position:relative;max-width:100%;height:885px}.main__image--title{position:absolute;left:50%;top:300px;transform:translateX(-50%)}.main__image--picture{display:flex}.main__image--picture li{position:absolute;top:0;left:0;width:100%;overflow:hidden}.main__image--picture li:first-child img{opacity:1}.main__image--picture li img{height:100%;transform:translateX(-20%);opacity:0;transition:opacity 2s ease}.main__image--tab{position:absolute;top:600px;gap:20px;left:50%}.main__image--tab button{width:10px;height:10px;border:none;margin:0 3px;cursor:pointer}.main__image--tab button:not(:last-child){border-radius:50%}.main__image--tab button:last-child{background:none;color:#fff;font-weight:800}.main__image--tab .on{background-color:orange}.main__content{margin-top:-150px;background-color:#f0f0f0;height:380px;display:flex}.main__content--container{display:flex;height:340px;z-index:20}.main__content--container .board{width:635px;height:100%}.main__content--container .board__tabBox{height:70px}.main__content--container .board__tabBox ul{display:flex;list-style:none;font-size:18px;font-weight:700;align-items:center;text-align:center;width:100%;height:100%}.main__content--container .board__tabBox ul li{width:30%;height:100%;line-height:70px;padding:0px 40px;background-color:rgba(85,85,85,.7);color:#fff}.main__content--container .board__tabBox ul li:last-child{font-size:36px;padding:0;width:10%}.main__content--container .board__tabBox ul li:hover{cursor:pointer}.main__content--container .board__tabBox ul li a{display:block;color:#fff;width:100%;height:100%}.main__content--container .board__tabBox ul .on{background-color:#fff;color:#000;text-decoration:underline}.main__content--container .board__tabContent{height:270px}.main__content--container .board__tabContent div{display:none;height:100%}.main__content--container .board__tabContent div ul{list-style:none;background-color:#fff;padding-left:20px;padding-top:30px;height:100%;box-sizing:border-box}.main__content--container .board__tabContent div ul li{position:relative;padding-left:20px;display:flex;align-items:center;margin-bottom:15px}.main__content--container .board__tabContent div ul li::before{content:"-";position:absolute;color:#a31432;font-weight:bold;left:0}.main__content--container .board__tabContent div ul li .type0{background-color:#818181;padding:5px 5px;color:#fff;font-size:12px;width:8%;text-align:center}.main__content--container .board__tabContent div ul li .type1{background-color:#3772aa;padding:5px 5px;color:#fff;font-size:12px;width:8%;text-align:center}.main__content--container .board__tabContent div ul li .type2{background-color:blue;padding:5px 5px;color:#fff;font-size:12px;width:8%;text-align:center}.main__content--container .board__tabContent div ul li .type3{background-color:#ef972a;padding:5px 5px;color:#fff;font-size:12px;width:8%;text-align:center}.main__content--container .board__tabContent div ul li .type4{background-color:#52c050;padding:5px 5px;color:#fff;font-size:12px;width:8%;text-align:center}.main__content--container .board__tabContent div ul li a{padding-left:5px;color:#000;font-weight:500;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;display:inline-block;width:62%}.main__content--container .board__tabContent div ul li .board__tabContent_date{color:gray;padding-left:30px}.main__content--container .board__tabContent .on{display:block}.main__content--container .menu{width:565px}.main__content--container .menu ul{list-style:none;display:grid;width:100%;height:100%;grid-template-rows:repeat(2, 1fr);grid-template-columns:repeat(3, 1fr)}.main__content--container .menu ul li{display:flex;flex-direction:column;justify-content:center;align-items:center;word-break:keep-all;text-align:center;gap:10px;color:#fff}.main__content--container .menu ul li span{font-size:12px}.main__content--container .menu ul li a{border:1px solid rgba(255,255,255,.5);padding:5px 20px;color:#fff}.main__content--container .menu__first{background-color:#a31432;color:#f7bac7}.main__content--container .menu__first:not(:last-child){border-right:1px solid #ba4f65}.main__content--container .menu__second{background-color:#51626f;color:#d8ebf9}.main__content--container .menu__second:not(:last-child){border-right:1px solid #687c8b}.main .popup{position:absolute;background:rgba(0,0,0,.3);top:30px;right:120px;color:#fff;padding:20px;width:480px}.main .popup div{display:flex;justify-content:space-between;align-items:center}.main .popup div button{background-color:rgba(0,0,0,0);border:none;color:#fff;font-size:36px;font-weight:200;cursor:pointer}.main .popup ul{list-style:none;height:200px;overflow:hidden;transition:height 1s}.main .popup ul li{margin:10px 0;transition:height 1s}.main .popup ul li a{border-radius:10px;display:flex;align-items:center;color:#fff}.main .popup ul li a span{padding:10px}.main .popup ul li a span:first-child{width:426px;text-overflow:ellipsis;overflow:hidden;display:inline-block;font-weight:600}.main .popup ul li a span:last-child{width:15px;text-align:center;background-color:#a31432}.main .popup ul li:not(:last-child) span:first-child{background-color:#a7874f}.main .popup ul li:last-child span:first-child{background-color:#fff;color:#000}.main .popup .on{height:0;overflow:hidden}.footer__menu{background-color:#f0f0f0;border-top:1px solid #d6d6d6;border-bottom:1px solid #d6d6d6}.footer__menu nav>ul{list-style:none;display:flex;position:relative}.footer__menu nav>ul>li>a{color:#222}.footer__menu nav>ul>li:not(:last-child){border-left:1px solid #d6d6d6;padding:15px 30px;font-size:14px}.footer__menu nav>ul>li:last-child{position:absolute;right:0;color:#fff;display:flex}.footer__menu nav>ul>li:last-child>div:not(:last-child){padding:10px 20px}.footer__menu nav>ul>li:last-child>div:first-child{background-color:#3a3a3a;font-size:12px;line-height:2;width:135px}.footer__menu nav>ul>li:last-child>div:first-child:hover{cursor:pointer}.footer__menu nav>ul>li:last-child>div:nth-child(2){background-color:#000;font-size:18px;line-height:1.5;width:20px;text-align:center}.footer__menu nav>ul>li:last-child>div:nth-child(2):hover{cursor:pointer}.footer__menu nav>ul>li:last-child .depth2{display:none}.footer__menu nav>ul>li:last-child .depth2 ul{list-style:none;height:250px;width:100%;position:absolute;left:0;top:0;z-index:100;transform:translateY(-102%)}.footer__menu nav>ul>li:last-child .depth2 ul li{padding:5px 20px;background-color:#a31432;border:1px solid #fff}.footer__menu nav>ul>li:last-child .depth2 ul li:last-child{border-bottom:none}.footer__menu nav>ul>li:last-child .depth2 ul li a{color:#fff}.footer__menu nav>ul>li:last-child .on{display:block}.footer__address{padding-top:20px}.footer__address--container{display:flex;justify-content:space-between}.footer__address--content{display:flex}.footer__address--content img{height:32px}.footer__address--content div{font-size:13px;padding-left:10px}.footer__address--promotion img{width:237px}`,
+          "",
+        ]);
+        const h = p;
+      },
+      645: (t) => {
+        t.exports = function (t) {
+          var e = [];
+          return (
+            (e.toString = function () {
+              return this.map(function (e) {
+                var n = "",
+                  o = void 0 !== e[5];
+                return (
+                  e[4] && (n += "@supports (".concat(e[4], ") {")),
+                  e[2] && (n += "@media ".concat(e[2], " {")),
+                  o &&
+                    (n += "@layer".concat(
+                      e[5].length > 0 ? " ".concat(e[5]) : "",
+                      " {"
+                    )),
+                  (n += t(e)),
+                  o && (n += "}"),
+                  e[2] && (n += "}"),
+                  e[4] && (n += "}"),
+                  n
+                );
+              }).join("");
+            }),
+            (e.i = function (t, n, o, i, a) {
+              "string" == typeof t && (t = [[null, t, void 0]]);
+              var r = {};
+              if (o)
+                for (var l = 0; l < this.length; l++) {
+                  var c = this[l][0];
+                  null != c && (r[c] = !0);
+                }
+              for (var d = 0; d < t.length; d++) {
+                var s = [].concat(t[d]);
+                (o && r[s[0]]) ||
+                  (void 0 !== a &&
+                    (void 0 === s[5] ||
+                      (s[1] = "@layer"
+                        .concat(s[5].length > 0 ? " ".concat(s[5]) : "", " {")
+                        .concat(s[1], "}")),
+                    (s[5] = a)),
+                  n &&
+                    (s[2]
+                      ? ((s[1] = "@media "
+                          .concat(s[2], " {")
+                          .concat(s[1], "}")),
+                        (s[2] = n))
+                      : (s[2] = n)),
+                  i &&
+                    (s[4]
+                      ? ((s[1] = "@supports ("
+                          .concat(s[4], ") {")
+                          .concat(s[1], "}")),
+                        (s[4] = i))
+                      : (s[4] = "".concat(i))),
+                  e.push(s));
+              }
+            }),
+            e
+          );
+        };
+      },
+      667: (t) => {
+        t.exports = function (t, e) {
+          return (
+            e || (e = {}),
+            t
+              ? ((t = String(t.__esModule ? t.default : t)),
+                /^['"].*['"]$/.test(t) && (t = t.slice(1, -1)),
+                e.hash && (t += e.hash),
+                /["'() \t\n]|(%20)/.test(t) || e.needQuotes
+                  ? '"'.concat(
+                      t.replace(/"/g, '\\"').replace(/\n/g, "\\n"),
+                      '"'
+                    )
+                  : t)
+              : t
+          );
+        };
+      },
+      81: (t) => {
+        t.exports = function (t) {
+          return t[1];
+        };
+      },
+      379: (t) => {
+        var e = [];
+        function n(t) {
+          for (var n = -1, o = 0; o < e.length; o++)
+            if (e[o].identifier === t) {
+              n = o;
+              break;
+            }
+          return n;
+        }
+        function o(t, o) {
+          for (var a = {}, r = [], l = 0; l < t.length; l++) {
+            var c = t[l],
+              d = o.base ? c[0] + o.base : c[0],
+              s = a[d] || 0,
+              p = "".concat(d, " ").concat(s);
+            a[d] = s + 1;
+            var u = n(p),
+              f = {
+                css: c[1],
+                media: c[2],
+                sourceMap: c[3],
+                supports: c[4],
+                layer: c[5],
+              };
+            if (-1 !== u) e[u].references++, e[u].updater(f);
+            else {
+              var h = i(f, o);
+              (o.byIndex = l),
+                e.splice(l, 0, { identifier: p, updater: h, references: 1 });
+            }
+            r.push(p);
+          }
+          return r;
+        }
+        function i(t, e) {
+          var n = e.domAPI(e);
+          return (
+            n.update(t),
+            function (e) {
+              if (e) {
+                if (
+                  e.css === t.css &&
+                  e.media === t.media &&
+                  e.sourceMap === t.sourceMap &&
+                  e.supports === t.supports &&
+                  e.layer === t.layer
+                )
+                  return;
+                n.update((t = e));
+              } else n.remove();
+            }
+          );
+        }
+        t.exports = function (t, i) {
+          var a = o((t = t || []), (i = i || {}));
+          return function (t) {
+            t = t || [];
+            for (var r = 0; r < a.length; r++) {
+              var l = n(a[r]);
+              e[l].references--;
+            }
+            for (var c = o(t, i), d = 0; d < a.length; d++) {
+              var s = n(a[d]);
+              0 === e[s].references && (e[s].updater(), e.splice(s, 1));
+            }
+            a = c;
+          };
+        };
+      },
+      569: (t) => {
+        var e = {};
+        t.exports = function (t, n) {
+          var o = (function (t) {
+            if (void 0 === e[t]) {
+              var n = document.querySelector(t);
+              if (
+                window.HTMLIFrameElement &&
+                n instanceof window.HTMLIFrameElement
+              )
+                try {
+                  n = n.contentDocument.head;
+                } catch (t) {
+                  n = null;
+                }
+              e[t] = n;
+            }
+            return e[t];
+          })(t);
+          if (!o)
+            throw new Error(
+              "Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid."
+            );
+          o.appendChild(n);
+        };
+      },
+      216: (t) => {
+        t.exports = function (t) {
+          var e = document.createElement("style");
+          return t.setAttributes(e, t.attributes), t.insert(e, t.options), e;
+        };
+      },
+      565: (t, e, n) => {
+        t.exports = function (t) {
+          var e = n.nc;
+          e && t.setAttribute("nonce", e);
+        };
+      },
+      795: (t) => {
+        t.exports = function (t) {
+          if ("undefined" == typeof document)
+            return { update: function () {}, remove: function () {} };
+          var e = t.insertStyleElement(t);
+          return {
+            update: function (n) {
+              !(function (t, e, n) {
+                var o = "";
+                n.supports && (o += "@supports (".concat(n.supports, ") {")),
+                  n.media && (o += "@media ".concat(n.media, " {"));
+                var i = void 0 !== n.layer;
+                i &&
+                  (o += "@layer".concat(
+                    n.layer.length > 0 ? " ".concat(n.layer) : "",
+                    " {"
+                  )),
+                  (o += n.css),
+                  i && (o += "}"),
+                  n.media && (o += "}"),
+                  n.supports && (o += "}");
+                var a = n.sourceMap;
+                a &&
+                  "undefined" != typeof btoa &&
+                  (o +=
+                    "\n/*# sourceMappingURL=data:application/json;base64,".concat(
+                      btoa(unescape(encodeURIComponent(JSON.stringify(a)))),
+                      " */"
+                    )),
+                  e.styleTagTransform(o, t, e.options);
+              })(e, t, n);
+            },
+            remove: function () {
+              !(function (t) {
+                if (null === t.parentNode) return !1;
+                t.parentNode.removeChild(t);
+              })(e);
+            },
+          };
+        };
+      },
+      589: (t) => {
+        t.exports = function (t, e) {
+          if (e.styleSheet) e.styleSheet.cssText = t;
+          else {
+            for (; e.firstChild; ) e.removeChild(e.firstChild);
+            e.appendChild(document.createTextNode(t));
+          }
+        };
+      },
+      775: (t, e, n) => {
+        t.exports = n.p + "53145f31ee69f9f4bd3f.gif";
+      },
+      900: (t, e, n) => {
+        t.exports = n.p + "c833a25c531ae8b80efa.png";
+      },
+    },
+    e = {};
+  function n(o) {
+    var i = e[o];
+    if (void 0 !== i) return i.exports;
+    var a = (e[o] = { id: o, exports: {} });
+    return t[o](a, a.exports, n), a.exports;
+  }
+  (n.m = t),
+    (n.n = (t) => {
+      var e = t && t.__esModule ? () => t.default : () => t;
+      return n.d(e, { a: e }), e;
+    }),
+    (n.d = (t, e) => {
+      for (var o in e)
+        n.o(e, o) &&
+          !n.o(t, o) &&
+          Object.defineProperty(t, o, { enumerable: !0, get: e[o] });
+    }),
+    (n.g = (function () {
+      if ("object" == typeof globalThis) return globalThis;
+      try {
+        return this || new Function("return this")();
+      } catch (t) {
+        if ("object" == typeof window) return window;
+      }
+    })()),
+    (n.o = (t, e) => Object.prototype.hasOwnProperty.call(t, e)),
+    (() => {
+      var t;
+      n.g.importScripts && (t = n.g.location + "");
+      var e = n.g.document;
+      if (!t && e && (e.currentScript && (t = e.currentScript.src), !t)) {
+        var o = e.getElementsByTagName("script");
+        if (o.length) for (var i = o.length - 1; i > -1 && !t; ) t = o[i--].src;
+      }
+      if (!t)
+        throw new Error(
+          "Automatic publicPath is not supported in this browser"
+        );
+      (t = t
+        .replace(/#.*$/, "")
+        .replace(/\?.*$/, "")
+        .replace(/\/[^\/]+$/, "/")),
+        (n.p = t);
+    })(),
+    (n.b = document.baseURI || self.location.href),
+    (n.nc = void 0),
+    (() => {
+      var t = n(379),
+        e = n.n(t),
+        o = n(795),
+        i = n.n(o),
+        a = n(569),
+        r = n.n(a),
+        l = n(565),
+        c = n.n(l),
+        d = n(216),
+        s = n.n(d),
+        p = n(589),
+        u = n.n(p),
+        f = n(405),
+        h = {};
+      (h.styleTagTransform = u()),
+        (h.setAttributes = c()),
+        (h.insert = r().bind(null, "head")),
+        (h.domAPI = i()),
+        (h.insertStyleElement = s()),
+        e()(f.Z, h),
+        f.Z && f.Z.locals && f.Z.locals;
+      const _ = document.getElementById("close");
+      _.addEventListener("click", () => {
+        const t = document.querySelector(".popup ul");
+        t.classList.toggle("on"),
+          "on" === t.className ? (_.textContent = "+") : (_.textContent = "×");
+      }),
+        document
+          .getElementsByClassName("board__tabBox")[0]
+          .addEventListener("click", (t) => {
+            const e = document.getElementsByClassName("tab");
+            Array.from(e).forEach((t) => {
+              t.classList.remove("on");
+            });
+            const n = t.target.closest("li");
+            n.classList.toggle("on");
+            const { id: o } = n.dataset,
+              i = document.getElementsByClassName("content");
+            Array.from(i).forEach((t) => {
+              t.getAttribute("data-id") === o
+                ? t.classList.contains("on") || t.classList.toggle("on")
+                : t.classList.remove("on");
+            });
+            const a = document.getElementsByClassName("tabPlus")[0];
+            console.log(a, o),
+              "1" === o
+                ? a.setAttribute(
+                    "href",
+                    "http://ipsi.sejong.ac.kr/sub_page/sub5/0107_list.asp?tab1=5&B_CODE=BOARD_1455878015&B_CATEGORY=0"
+                  )
+                : "2" === o
+                ? a.setAttribute(
+                    "href",
+                    "http://ipsi.sejong.ac.kr/sub_page/sub5/0102_list.asp?tab1=5&B_CODE=BOARD_1455985403&B_CATEGORY=0"
+                  )
+                : "3" === o &&
+                  a.setAttribute(
+                    "href",
+                    "http://ipsi.sejong.ac.kr/sub_page/sub5/0109_list.asp?tab1=5&B_CODE=BOARD_1464099007&B_CATEGORY=0"
+                  );
+          });
+      const g = document.querySelectorAll(".picture--item"),
+        m = document.querySelectorAll(".tab--square");
+      let x,
+        b = 0;
+      function v() {
+        const t = b;
+        (b = (b + 1) % g.length), y(t, b);
+      }
+      function y(t, e) {
+        (g[t].querySelector("img").style.opacity = 0),
+          (g[e].querySelector("img").style.opacity = 1),
+          m[t].classList.remove("on"),
+          m[e].classList.add("on");
+      }
+      function w() {
+        x = setInterval(v, 5e3);
+      }
+      Array.from(m).forEach((t, e) => {
+        t.addEventListener("click", () => {
+          const t = b;
+          (b = e), y(t, b);
+        });
+      }),
+        w();
+      const k = document.querySelector(".stop");
+      k.addEventListener("click", () => {
+        k.classList.contains("on")
+          ? (k.textContent = "►")
+          : (k.textContent = "||"),
+          k.classList.toggle("on"),
+          x ? (clearInterval(x), (x = null)) : w();
+      }),
+        document
+          .getElementsByClassName("siteGo")[0]
+          .addEventListener("click", (t) => {
+            const e = t.target.parentElement.querySelector(".depth2");
+            console.log(t.target), e.classList.toggle("on");
+          }),
+        document
+          .getElementsByClassName("go")[0]
+          .addEventListener("click", () =>
+            alert("주요 사이트를 선택해주세요.")
+          );
+    })();
+})();
