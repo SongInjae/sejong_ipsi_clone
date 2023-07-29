@@ -1,4 +1,4 @@
-import "./scss/main.scss";
+import "../scss/main.scss";
 
 /* popup창 관련 js - 'X'나 '+' 누르면 클래스 toggle과 글자 변환 */
 const btnElement = document.getElementById("close");
