@@ -1,0 +1,112 @@
+@use "./variables";
+
+.footer {
+    &__menu {
+        background-color: variables.$back_gray;
+        border-top: 1px solid #d6d6d6;
+        border-bottom: 1px solid #d6d6d6;
+        nav {
+            & > ul {
+                list-style: none;
+                display: flex;
+                position: relative;
+    
+                & > li {
+                    & > a {
+                        color: #222;
+                    }
+                    &:not(:last-child) {
+                        border-left: 1px solid #d6d6d6;
+                        padding: 15px 30px;
+                        font-size: 14px;
+                    }
+                    &:last-child {
+                        position: absolute;
+                        right: 0;
+                        color: white;
+                        display: flex;
+    
+                        & > div {
+                            &:not(:last-child) {
+                                padding: 10px 20px;
+                            }
+                            &:first-child {
+                                background-color: #3a3a3a;
+                                font-size: 12px;
+                                line-height: 2;
+                                width: 135px;
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                            &:nth-child(2) {
+                                background-color: black;
+                                font-size: 18px;
+                                line-height: 1.5;
+                                width: 20px;
+                                text-align: center;
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                        .depth2 {
+                            display: none;
+                            ul {
+                                list-style: none;
+                                height: 250px;
+                                width: 100%;
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                z-index: 100;
+                                transform: translateY(-102%);
+                                li {
+                                    padding: 5px 20px;
+                                    background-color: variables.$crimsonRed;
+                                    border: 1px solid white;
+                                    &:last-child {
+                                        border-bottom: none;
+                                    }
+
+                                    a {
+                                        color: white;
+                                    }
+                                }
+                            }
+                        }
+                        .on {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__address {
+        padding-top: 20px;
+
+        &--container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &--content {
+            display: flex;
+
+            img {
+                height: 32px;
+            }
+            div {
+                font-size: 13px;
+                padding-left: 10px;
+            }
+        }
+        &--promotion {
+            img {
+                width: 237px;
+            }
+        }
+    }
+}

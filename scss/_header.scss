@@ -1,0 +1,130 @@
+@use "./variables";
+
+.header {
+    &__utils {
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 12px;
+            div {
+                margin: 10px 0;
+                a {
+                    color: #777;
+                    line-height: 1.5;
+                    padding: 0 25px;
+                    font-weight: 500;
+                    font-size: 13px;
+                    &:first-child {
+                        border-right: 1px solid #777;
+                    }
+                }
+            }
+        }
+        &--school{
+            background: url("../images/sejong_u_home_arrow.png") 18px 12px no-repeat #777;
+            vertical-align: middle;
+            overflow: hidden;
+            text-decoration: none;
+            span {
+                padding: 11px 15px 13px 46px;
+                color: white;
+                line-height: 3;
+            }
+        }
+    }
+    &__menu {
+        background-color: variables.$crimsonRed;
+        nav {
+            position: relative;
+            &:hover {
+                .depth2 {
+                    display: flex;
+                }
+            }
+            ul {
+                width: 100%;
+                display: flex;
+                list-style: none;
+                justify-content: center;
+                color: white;
+                text-align: center;
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+        &--title {
+            background: url("../images/h1_logo.gif") no-repeat center;
+            width: 240px;
+            height: 65px;
+            display: block;
+            background-color: white;
+        }
+        &--main {
+            padding: 0px 30px;
+            border-right: 1px solid variables.$border-red;
+            border-bottom: 1px solid variables.$border-red;
+            word-break: keep-all;
+            font-weight: 700;
+            flex: 1;
+            &:hover {
+                background-color: #630c1e;
+                .depth2 {
+                    background-color: #f1e9d9;
+                }
+            }
+            a {
+                color: white;
+            }
+        }
+    }
+    .depth2 {
+        display: none;
+        position: relative;
+        border-right: none ;
+        border-left: 1px solid #dedede;
+        ul {
+            padding-top: 5px;
+            display: flex;
+            flex-direction: column;
+            height: 350px;
+            justify-content: flex-start !important;
+            li {
+                border-bottom: none ;
+                padding: 10px 50px 10px 10px ;
+                justify-content: flex-start ;
+                font-size: 12px;
+                font-weight: 400 ;
+                a {
+                    width: 76px;
+                    color: #555;
+                    text-align: left;
+                    &:hover {
+                        color: variables.$crimsonRed;
+                        font-weight: 800;
+                    }
+                }
+            }
+        }
+        position: absolute; /* 부모 요소를 기준으로 위치를 설정 */
+        top: 100%; /* 부모 요소(.header__menu) 아래에 위치하도록 설정 */
+        flex-direction: column; /* 가로 메뉴를 세로로 배치 */
+        background-color: #fff;
+        z-index: 100;
+    
+        &__title {
+            padding-top: 5px;
+            height: 350px;
+            color: #555;
+            text-align: left;
+            align-items: flex-end;
+            display: flex;
+            span {
+                padding: 0 40px 100px 30px;
+                font-weight: 600;
+            }
+        }
+    }
+}
